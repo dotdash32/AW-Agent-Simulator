@@ -10,6 +10,8 @@
 
 players = []; %intiliaze
 
+rng(2039); %set the seed
+
 for numOrig = 1:100
     newPlayer = makePlayer(0,0,1);
     players = [players newPlayer];

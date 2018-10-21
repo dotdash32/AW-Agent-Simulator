@@ -70,8 +70,8 @@ function newPlayers = duel(players, p1,p2, round)
         newPlayers(p2).record{2,end} = p2text;
     end %if winning
         
-    newPlayers(p1).exp = players(p1).exp +players(p2).exp*expDiff*1;
-    newPlayers(p2).exp = players(p2).exp +players(p1).exp*expDiff*1; 
+    newPlayers(p1).exp = players(p1).exp +players(p2).exp*expDiff*.01;
+    newPlayers(p2).exp = players(p2).exp +players(p1).exp*expDiff*.01; 
                 %exp gain prop to color diff, other player's diff
         
 end
