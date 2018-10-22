@@ -1,4 +1,4 @@
-function newPlayers = duel(players, p1,p2, round)
+function newPlayers = duel(players, p1,p2, rounds)
 %DUEL simulate a battle between two players
     %p1/2 are indices, players is the input struct
     % percentage of winning chance defined by exp, color matchup
@@ -21,11 +21,11 @@ function newPlayers = duel(players, p1,p2, round)
     chance2 = players(p2).exp*rand(1); %exp and chance
     if(chance1 > chance2) % p1 wins
         if(players(p1).lvl > players(p2).lvl) %p1 was expected to
-            newPlayers(p1).BP = players(p1).BP +(10/lvlDiff);
-            newPlayers(p2).BP = players(p2).BP -(10/lvlDiff); 
+            newPlayers(p1).BP = players(p1).BP + round(10/(1+lvlDiff));
+            newPlayers(p2).BP = players(p2).BP - round(10/(1+lvlDiff)); 
         elseif(players(p1).lvl < players(p2).lvl) %p1 was not expected to
-            newPlayers(p1).BP = players(p1).BP +(10*lvlDiff); 
-            newPlayers(p2).BP = players(p2).BP -(10*lvlDiff); 
+            newPlayers(p1).BP = players(p1).BP +(10*(1+lvlDiff)); 
+            newPlayers(p2).BP = players(p2).BP -(10*(1+lvlDiff)); 
         else %same level
             newPlayers(p1).BP = players(p1).BP +10;
             newPlayers(p2).BP = players(p2).BP -10;
@@ -34,17 +34,17 @@ function newPlayers = duel(players, p1,p2, round)
             players(p2).lvl, p2, players(p1).lvl);
         p2text = sprintf('Lost against lvl%d %d (lvl%d)', ...
             players(p1).lvl, p1, players(p2).lvl);
-        newPlayers(p1).record{1,end+1} = round;
+        newPlayers(p1).record{1,end+1} = rounds;
         newPlayers(p1).record{2,end} = p1text;
-        newPlayers(p2).record{1,end+1} = round;
+        newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
     elseif(chance1 < chance2) % p2 wins
         if(players(p1).lvl > players(p2).lvl) %p2 was not expected to
-            newPlayers(p1).BP = players(p1).BP -(10*lvlDiff);
-            newPlayers(p2).BP = players(p2).BP +(10*lvlDiff); 
+            newPlayers(p1).BP = players(p1).BP -(10*(1+lvlDiff));
+            newPlayers(p2).BP = players(p2).BP +(10*(1+lvlDiff)); 
         elseif(players(p1).lvl < players(p2).lvl) %p2 was expected to
-            newPlayers(p1).BP = players(p1).BP -(10/lvlDiff); 
-            newPlayers(p2).BP = players(p2).BP +(10*lvlDiff); 
+            newPlayers(p1).BP = players(p1).BP - round(10/(1+lvlDiff)); 
+            newPlayers(p2).BP = players(p2).BP + round(10*(1+lvlDiff)); 
         else %same level
             newPlayers(p1).BP = players(p1).BP -10;
             newPlayers(p2).BP = players(p2).BP +10;
@@ -53,9 +53,9 @@ function newPlayers = duel(players, p1,p2, round)
             players(p2).lvl, p2, players(p1).lvl);
         p2text = sprintf('Won against lvl%d %d (lvl%d)', ...
             players(p1).lvl, p1, players(p2).lvl);
-        newPlayers(p1).record{1,end+1} = round;
+        newPlayers(p1).record{1,end+1} = rounds;
         newPlayers(p1).record{2,end} = p1text;
-        newPlayers(p2).record{1,end+1} = round;
+        newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
     else %tie, equal opp, no points lost
         newPlayers(p1).BP = players(p1).BP +0; %draw
@@ -64,9 +64,9 @@ function newPlayers = duel(players, p1,p2, round)
             players(p2).lvl, p2, players(p1).lvl);
         p2text = sprintf('Draw against lvl%d %d (lvl%d)', ...
             players(p1).lvl, p1, players(p2).lvl);
-        newPlayers(p1).record{1,end+1} = round;
+        newPlayers(p1).record{1,end+1} = rounds;
         newPlayers(p1).record{2,end} = p1text;
-        newPlayers(p2).record{1,end+1} = round;
+        newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
     end %if winning
         
