@@ -15,7 +15,8 @@ The siimulation is broken into two main phases:
 
 2. Repeated rounds of duels and BP exchanges
 
-### Creation of player  - `makePlayer(parent, parentGen, round)`
+### Creation of player  
+`makePlayer(parent, parentGen, round)`
 
 * Basic code to create a new player with minimum inputs.
 
@@ -39,11 +40,13 @@ Each player is assigned a number that is their index in the struct array.  As pl
 Color, Saturaiton, and Experience are randomly assigned using MATLAB's `randi()` feature.  The range of starting experience is a major variable in how the game continues   
 > In my experience, even with only 3 levels of base experience, only the top tier will be able to survive for any length of time.  It might be possible to more easily follow players by increasing the range of allowed base experience, and then tracking everyone who has the max rating at creation.
 
-### Duels - `duel(players, p1, p2, rounds)`
+### Duels 
+`duel(players, p1, p2, rounds)`
+
 Function to simulate a duel between two players, `p1` (Player 1) and `p2` (Player 2) contained within the `players` struct.  `rounds` is taken as an input for record keeping.
 
 Player 1 is always considered the challenger, and loses a Burst Point automatically upon beginning the duel.
 
 >It's possible for someone to have 1 BP, accelerate, be at zero, and not actually die, but it seems like the volume supports this as an option
 
-The sweep area on the color circle between the two players is then determined.  This is defined as the area between the colors as *theta* and thesaturations as *rho*.  This creates 
+The sweep area on the color circle between the two players is then determined.  This is defined as the area between the colors as *theta* and the saturations as *rho*.  This creates a sector of a donut, 
