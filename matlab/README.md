@@ -2,23 +2,52 @@
 
 A simulation in Matlab by Dotdash32
 
+Notes on the construction and format of the simulation, in hopes of making the code simpler to understand.  
+> Personal notes are in quotes, like this. 
+> My own way of inserting comments about how the simulation has run in the past.
+
 ## Premise
 
 Simulate the first 100 BB players and see how the environment of Brain Burst changed over time.
 
+What key variables define how successive Brain Burst is compared to Accel Assault or Cosmos Corrupt?  The primary factors of investigation are
+
+* Birth rate - how fast do players create new players with 100 BP
+
+* Duel rate - how many and how often do people duel?  Can we simulate a way to factor in human factors like "winning streaks" or people being more conservative as they lose BP?
+
+* Learning rate - how fast do people learn the game, and is there an inherent curve that is almost impossible to beat at any stage of the game?
+
+* Inherent talent - how much gradation of talent/skill is there and at what rate do people learn and become better at fighting?
+
 
 ## Simulation
 
-The siimulation is broken into two main phases:
+The siimulation is broken into several  phases:
 
-1. Creation of the first 100 players and
+1. Creation of the first 100 players
 
-2. Repeated rounds of duels and BP exchanges
+2. Repeated rounds of :
+
+    * Duels  
+        1. Select a player who is alive at random
+        2. Check to make sure they haven't already dueled this round
+        3. Select another player who is alive at random
+        4. Check they haven't dueled and aren't the first person
+        5. Initiate a duel, evaulate win condition, transfer BP
+            *  More details in Duel section 
+    * Births - Potentially introduce new players
+        * Details in MakeBabes section
+    * Tracking - print out data to track the simulation over time - TODO
+        * Implement way to track interesting characters automatically?
+        * Report BP amounts, number of players
+        * Create graphs
+
 
 ### Creation of player  
 `makePlayer(parent, parentGen, round)`
 
-* Basic code to create a new player with minimum inputs.
+Basic code to create a new player with minimum inputs.
 
 * `parent` is the numerical index of the parent player.  Zero if first generation (Originator)
 
