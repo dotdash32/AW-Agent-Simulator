@@ -49,4 +49,8 @@ Player 1 is always considered the challenger, and loses a Burst Point automatica
 
 >It's possible for someone to have 1 BP, accelerate, be at zero, and not actually die, but it seems like the volume supports this as an option
 
-The sweep area on the color circle between the two players is then determined.  This is defined as the area between the colors as *theta* and the saturations as *rho*.  This creates a sector of a donut, 
+The swept area on the color circle between the two players is then determined.  This is defined as the area between the colors as *theta* and the saturations as *rho*.  This creates a sector of a donut, and the percent coverage is obtained by dividing by the total area of the circle.  In this manner, an experience gain modifier is created based on percieved difference in matchup.
+
+The above calculation relies on the idea that colors far away on the color wheel will not be as good of a matchup and will therefore be a more difficult duel and cause the player to learn more.  In a similar vein, having a high difference in saturation will be a different manner of fighting as well.  The logic is that if you know how you fight, then you would learn less from people of a similar section on the color wheel because comparative abilities would be more similar.
+
+To calculate the win percentage, 
