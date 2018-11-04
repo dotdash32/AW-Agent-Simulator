@@ -1,6 +1,10 @@
-function newPlayers = makeBabes(players, rounds)
+function newPlayers = makeBabes(players, rounds, para)
 %makeBabes Make some babies to keep the pool alive
     %create new players each with 100 BP 
+    
+    %parameters
+    %para.chanceFcn - function handle to evaulate whether or not the chosen
+        %player will have a child this round or no
     
     newPlayers = players; %fill
     if(any([players.lvl] >1)) %can we even have kids? save func time
@@ -8,8 +12,7 @@ function newPlayers = makeBabes(players, rounds)
         for ind = potential %loop through all the potentials
             if(players(ind).gen == 1 || players(ind).kid == 0)
                     %can they have another kid
-                if(randi(floor(rounds/30)+1, 1) == randi(floor(rounds/30)+1,1)) 
-                %if(1) %try max reproduction
+                if(para.chanceFcn(rounds) == para.chanceFcn(rounds)) 
                                 %chance decreasing
                     newb = makePlayer(ind,players(ind).gen, rounds); %baby
                     newPlayers = [newPlayers newb]; %concat

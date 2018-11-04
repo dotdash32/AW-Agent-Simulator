@@ -1,5 +1,8 @@
-function player = makePlayer(parent, parentGen, round)
+function player = makePlayer(parent, parentGen, round, para)
 %makePlayer create a new BBplayer
+
+    %parameters to change:
+    %para.expRange - vector of range of experiences
 if(parent == 0) %originator
     player.gen = 1;
     player.record = {round; 'Created, Originator'}; %whose nonkid
@@ -14,7 +17,7 @@ player.rounds = [round, 0]; %still alive
 player.lvl = 1; %start at round 1
 player.kid = 0; %how many children
 player.BP = 100; %starts with 100 points
-player.exp = randi([1  10], 1); %base exp, from IRL?
+player.exp = randi(para.expRange, 1); %base exp, from IRL?
 
 end
 
