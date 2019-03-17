@@ -13,11 +13,18 @@ else
 end
 player.color = randi([1 360], 1); %assign color
 player.sat = randi([0 100], 1); %assign saturation
+player.val = randi([0 100], 1); %assign value (HSV thingy)
 player.rounds = [round, 0]; %still alive
 player.lvl = 1; %start at round 1
 player.kid = 0; %how many children
 player.BP = 100; %starts with 100 points
-player.exp = randi(para.expRange, 1); %base exp, from IRL?
+
+%base exp, from IRL?
+if(strcmp(para.expVer,'cont')) %continuous distrobution
+    player.exp = rand(1)*para.expMax; %between 0-expMax
+elseif(strcmp(para.expVer,'disc')) %discrete integer vals
+    player.exp = randi(para.expRange, 1); %only ints allowed
+end
 player.wins = [0;1]; %how many wins/total battles
 
 end

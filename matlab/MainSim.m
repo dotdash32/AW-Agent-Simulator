@@ -10,10 +10,13 @@ roundLim = 400; %how many rounds to run of the simulation
 
 
 % makePlayer
-makePlayerPara.expRange = [1 10]; %range of experience values
+makePlayerPara.expVer = 'cont'; %or discr
+makePlayerPara.expRange = [1 10]; %range of experience values ('disc')
+makePlayerPara.expMax = 10; %max of continuous exp vals ('cont')
+    %adding options for continuous or discrete starting exps
 
 %duel
-duelPara.expMod = .025; %modifier for experience gain
+duelPara.expMod = .05; %modifier for experience gain
 duelPara.drawTol = 5e-5; %tolerance for considering a draw
 duelPara.highWinTrans = @(lvlDiff) round(10/(1+lvlDiff)); %points 
     %transferered when player with the higher level (is expected to) wins

@@ -16,9 +16,11 @@ function newPlayers = duel(players, p1,p2, rounds, para)
     else
         angle = angleRaw;
     end
-    sweep = abs((pi*angle/180)*((players(p1).sat)^2 -(players(p2).sat)^2));
-                    % swept area of difference, use for exp gain
-    totalSweep = 2*pi*(100^2); %total area of color wheel
+    sweep = abs((pi*angle/180)*((players(p1).sat)^2 -(players(p2).sat)^2)...
+        * (players(p1).val - players(p2).val));
+            % swept volume of difference, use for exp gain
+            %Converted to volumetric change for better color rep
+    totalSweep = 2*pi*(100^2)*100; %total volume of color wheel
     expDiff = sweep/totalSweep; %make it easier
     lvlDiff = abs(players(p1).lvl - players(p2).lvl); %what's the diff?
     chance1 = players(p1).exp*rand(1); %chances of winning, factoring in
