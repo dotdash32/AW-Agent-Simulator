@@ -1,13 +1,19 @@
+%% Main simulation Body
+%Create a simulation of Brain Burst in the early days
+
 %% Define parameters
 % Define parameters to be passed into functions, for easier editing
 
 rng(2039); %set the seed
 
+roundLim = 400; %how many rounds to run of the simulation
+
+
 % makePlayer
-makePlayerPara.expRange = [1 20]; %range of experience values
+makePlayerPara.expRange = [1 10]; %range of experience values
 
 %duel
-duelPara.expMod = .01; %modifier for experience gain
+duelPara.expMod = .025; %modifier for experience gain
 duelPara.drawTol = 5e-5; %tolerance for considering a draw
 duelPara.highWinTrans = @(lvlDiff) round(10/(1+lvlDiff)); %points 
     %transferered when player with the higher level (is expected to) wins
@@ -49,12 +55,15 @@ end
 
 %% Run sim
 
+close all;
+
 deadlist = []; %no one's dead yet
 livelist = 1:100; %everyone's alive
 bigData = struct; %empty, no data yet
 
+[stateFig, movie] = graphImmediate(players, 0, livelist, 0); %initialize
 
-for rounds = 1:50 %loop the simulation
+for rounds = 1:roundLim %loop the simulation
     
     numsPicked = []; %zero out picked duelers
     fights = 0; %reset counter
@@ -77,17 +86,34 @@ for rounds = 1:50 %loop the simulation
     end
     [players, deadlist, livelist] = killEm(players, rounds); %eliminate dead players
     players = lvlUp(players, rounds, lvlUpPara); %do level ups
-    players = makeBabes(players, rounds, makeBabesPara); %add players
+    players = makeBabes(players, rounds, makeBabesPara, makePlayerPara); %add players
     
     bigData = recordTrends(players, rounds, livelist, bigData); %record info
     
+    %Graph each round's state
+    [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie);
+    
+    if(size(livelist,2)  <= 1)
+        %can't duel any more
+        break;
+    end %if out of players
 end
 
 
 %% Graphing and Analysis
 %Analyze what happened, hopefully
 
+[stateFig, movie] = graphImmediate(players, -1, livelist, movie); %initialize
 fig = graphTrends(bigData); %graph what's happening
 
-
+simTitle = inputdlg('Sim Title, hit cancel to not save', 'Save Simulation?');
+if(~isempty(simTitle)) %are we saving?
+    filepath1 = sprintf('SavedSims/%s.mat', simTitle{1}); %for data
+    filepath2 = sprintf('SavedSims/%s.fig', simTitle{1}); %for figure
+    filepath3 = sprintf('SavedSims/%s.png', simTitle{1}); %for image
+    save(filepath1, 'bigData','players'); %save data and players struct
+    savefig(fig, filepath2); % save the figure
+    print(fig, filepath3, '-dpng');
+    
+end 
 

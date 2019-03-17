@@ -35,6 +35,9 @@ function newPlayers = duel(players, p1,p2, rounds, para)
         newPlayers(p1).record{2,end} = p1text;
         newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
+        
+        newPlayers(p1).wins = players(p1).wins + [.5;1]; %calculate win
+        newPlayers(p2).wins = players(p2).wins + [.5;1]; %percentage
     elseif(chance1 > chance2) % p1 wins
         if(players(p1).lvl > players(p2).lvl) %p1 was expected to
             newPlayers(p1).BP = players(p1).BP + para.highWinTrans(lvlDiff);
@@ -54,6 +57,9 @@ function newPlayers = duel(players, p1,p2, rounds, para)
         newPlayers(p1).record{2,end} = p1text;
         newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
+        
+        newPlayers(p1).wins = players(p1).wins + [1;1]; %calculate win
+        newPlayers(p2).wins = players(p2).wins + [0;1]; %percentage
     elseif(chance1 < chance2) % p2 wins
         if(players(p1).lvl > players(p2).lvl) %p2 was not expected to
             newPlayers(p1).BP = players(p1).BP - para.lowWinTrans(lvlDiff);
@@ -73,6 +79,9 @@ function newPlayers = duel(players, p1,p2, rounds, para)
         newPlayers(p1).record{2,end} = p1text;
         newPlayers(p2).record{1,end+1} = rounds;
         newPlayers(p2).record{2,end} = p2text;
+        
+        newPlayers(p1).wins = players(p1).wins + [0;1]; %calculate win
+        newPlayers(p2).wins = players(p2).wins + [1;1]; %percentage
     end %if winning
         
     newPlayers(p1).exp = players(p1).exp +players(p2).exp*expDiff*para.expMod;

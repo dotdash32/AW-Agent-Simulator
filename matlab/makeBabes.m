@@ -1,4 +1,4 @@
-function newPlayers = makeBabes(players, rounds, para)
+function newPlayers = makeBabes(players, rounds, para, makePlayerPara)
 %makeBabes Make some babies to keep the pool alive
     %create new players each with 100 BP 
     
@@ -14,7 +14,8 @@ function newPlayers = makeBabes(players, rounds, para)
                     %can they have another kid
                 if(para.chanceFcn(rounds) == para.chanceFcn(rounds)) 
                                 %chance decreasing
-                    newb = makePlayer(ind,players(ind).gen, rounds); %baby
+                    newb = makePlayer(ind,players(ind).gen, rounds, ...
+                        makePlayerPara); %baby
                     newPlayers = [newPlayers newb]; %concat
                     newPlayers(ind).kid = players(ind).kid + 1; %number them
                 end %if baby

@@ -18,6 +18,7 @@ player.lvl = 1; %start at round 1
 player.kid = 0; %how many children
 player.BP = 100; %starts with 100 points
 player.exp = randi(para.expRange, 1); %base exp, from IRL?
+player.wins = [0;1]; %how many wins/total battles
 
 end
 
