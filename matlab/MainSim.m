@@ -4,9 +4,10 @@
 %% Define parameters
 % Define parameters to be passed into functions, for easier editing
 
-rng(2039); %set the seed
+seedy = 2039; %save for later
+rng(seedy); %set the seed
 
-roundLim = 400; %how many rounds to run of the simulation
+roundLim = 500; %how many rounds to run of the simulation
 
 
 % makePlayer
@@ -14,6 +15,9 @@ makePlayerPara.expVer = 'cont'; %or discr
 makePlayerPara.expRange = [1 10]; %range of experience values ('disc')
 makePlayerPara.expMax = 10; %max of continuous exp vals ('cont')
     %adding options for continuous or discrete starting exps
+makePlayerPara.valDistro = [5 5]; %A = B for beta distrobution
+makePlayerPara.satDistro = [4 2]; %A, B for satruation (radius) distro
+makePlayerPara.MoralBooster = 10; %multiplier for morality
 
 %duel
 duelPara.expMod = .05; %modifier for experience gain
@@ -24,6 +28,7 @@ duelPara.lowWinTrans = @(lvlDiff) (10*(1+lvlDiff)); %points transfered
     %when player with lower level (unexpected) wins
 duelPara.equalWinTrans = 10; %points to transfer at the same level
 duelPara.drawTrans = 0; %points to transfer for a draw
+duelPara.lvlGain = @(lvl) lvl.^2; %how does your level win chance?
 
 %killEm
 %none here, nothing to change yet
@@ -31,12 +36,36 @@ duelPara.drawTrans = 0; %points to transfer for a draw
 %lvlUp
 lvlUpPara.points = [300 400 600 900 1500 3000 6000 10000]; %from JP wiki
     %number of points needed to increase in level
+lvlUpPara.margin = 1.5; %total safety margin to level up
     
 %makeBabes
 makeBabesPara.chanceFcn = @(x) randi(floor(x/30)+1, 1); %chance function
     %if it is equal to itself, BB player has a child.  Should be decreasing
     %in frequency over time because the random range gets bigger
 
+%Pure Colors
+PureColors = struct('color', {0 60 120 240 300 180}, 'sat',...
+    {100 100 100 100 100 0}, 'light', {50 50 50 50 50 100});
+    %What colors will they be?  White Cosmos is "infinite" theta...
+PureColorPara.exp = makePlayerPara.expMax*1.1; %super high
+    %set it so they are always more powerful
+
+
+%% Title and Preface simulation
+% Move titling up, and create text file of parameters
+
+simTitle=inputdlg('Sim Title, hit cancel to not save', 'Save Simulation?');
+if(~isempty(simTitle)) %are we saving?
+    simTitle = simTitle{1}; %to string
+    saveInfo; %save information, now in separate script
+    % Things to do
+    %Add round number to bb chart
+    % internlzie LIvelist funciton --> create mainsim function
+    % make iterative version?  click through and analyze?
+    
+else %there's no value
+    simTitle = 'noName'; %filler so it still graphs
+end
 
 %% Create structs
 % gen - which generation are they?
@@ -48,10 +77,17 @@ makeBabesPara.chanceFcn = @(x) randi(floor(x/30)+1, 1); %chance function
 % exp - personal experience, increments through battles
 %players = struct('gen','','color','', 'sat','','rounds','','BP','', 'exp','');
 
-players = []; %intiliaze
+players = struct([]); %intiliaze
 
+%make Pure Colors and follow them
+for numPures = 1:6
+    newPlayer = makePureColor(PureColors(numPures),PureColorPara);
+        %create pure colors, only varying color, keeping Exp, etc const
+    players = [players newPlayer];
+end
 
-for numOrig = 1:100
+%make Normal players
+for numOrig = 7:100
     newPlayer = makePlayer(0,0,1, makePlayerPara);
     players = [players newPlayer];
 end
@@ -64,7 +100,7 @@ deadlist = []; %no one's dead yet
 livelist = 1:100; %everyone's alive
 bigData = struct; %empty, no data yet
 
-[stateFig, movie] = graphImmediate(players, 0, livelist, 0); %initialize
+[stateFig, movie] = graphImmediate(players, 0, livelist, 0, simTitle); %initialize
 
 for rounds = 1:roundLim %loop the simulation
     
@@ -94,7 +130,7 @@ for rounds = 1:roundLim %loop the simulation
     bigData = recordTrends(players, rounds, livelist, bigData); %record info
     
     %Graph each round's state
-    [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie);
+    [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie, rounds);
     
     if(size(livelist,2)  <= 1)
         %can't duel any more
@@ -106,14 +142,16 @@ end
 %% Graphing and Analysis
 %Analyze what happened, hopefully
 
-[stateFig, movie] = graphImmediate(players, -1, livelist, movie); %initialize
-fig = graphTrends(bigData); %graph what's happening
+bigData(1).simmy = simTitle; %save it to pass in for graphing
+[stateFig, movie] = graphImmediate(players, -1, livelist, movie, rounds); %initialize
+fig = graphTrends(bigData, players); %graph what's happening
 
-simTitle = inputdlg('Sim Title, hit cancel to not save', 'Save Simulation?');
+%still check if saving
 if(~isempty(simTitle)) %are we saving?
-    filepath1 = sprintf('SavedSims/%s.mat', simTitle{1}); %for data
-    filepath2 = sprintf('SavedSims/%s.fig', simTitle{1}); %for figure
-    filepath3 = sprintf('SavedSims/%s.png', simTitle{1}); %for image
+    
+    filepath1 = sprintf('SavedSims/%s/data.mat', simTitle); %for data
+    filepath2 = sprintf('SavedSims/%s/trendsFig.fig', simTitle); %for figure
+    filepath3 = sprintf('SavedSims/%s/trendsPic.png', simTitle); %for image
     save(filepath1, 'bigData','players'); %save data and players struct
     savefig(fig, filepath2); % save the figure
     print(fig, filepath3, '-dpng');

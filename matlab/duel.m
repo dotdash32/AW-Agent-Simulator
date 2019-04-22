@@ -23,8 +23,10 @@ function newPlayers = duel(players, p1,p2, rounds, para)
     totalSweep = 2*pi*(100^2)*100; %total volume of color wheel
     expDiff = sweep/totalSweep; %make it easier
     lvlDiff = abs(players(p1).lvl - players(p2).lvl); %what's the diff?
-    chance1 = players(p1).exp*rand(1); %chances of winning, factoring in
-    chance2 = players(p2).exp*rand(1); %exp and chance
+    chance1 = players(p1).exp*rand(1)*para.lvlGain(players(p1).lvl);
+    chance2 = players(p2).exp*rand(1)*para.lvlGain(players(p2).lvl); 
+        %above factors in experience, level, and an element of random
+        %chance, reworkin to change how lvl changes it
     
     if(abs(chance1 - chance2) < para.drawTol) %tie, equal opp, no points lost
         newPlayers(p1).BP = players(p1).BP + para.drawTrans; %draw

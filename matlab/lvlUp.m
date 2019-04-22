@@ -11,7 +11,7 @@ function [newPlayers] = lvlUp(players, round, para)
     newPlayers = players; %refill
     
     for ind = 1:size(players,2) %go through everyone
-        if(players(ind).BP > (1.25*para.points(players(ind).lvl)))
+        if(players(ind).BP > (para.margin*para.points(players(ind).lvl)))
                 %they are over saftey margin
             newPlayers(ind).BP = players(ind).BP-para.points(players(ind).lvl);
             newPlayers(ind).lvl = players(ind).lvl +1; %level them up
