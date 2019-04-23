@@ -28,4 +28,4 @@ codegen/
 octave-workspace
 
 # Generated Videos - Too big
-*.mp4
+# *.mp4 #can include on LFS hopefully
