@@ -4,4 +4,6 @@
 *.p -crlf -diff -merge
 *.slx -crlf -diff -merge
 *.mdl -crlf -diff -merge
-*.mp4 filter=lfs diff=lfs merge=lfs -text
+
+#Not using LFS
+# *.mp4 filter=lfs diff=lfs merge=lfs -text
