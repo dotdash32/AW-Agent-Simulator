@@ -8,3 +8,8 @@ Possible Experience Range: 1 to 10(discrete integer values only)
 Maximum possible Experience: 10 (continuous distrobution) 
 ### duel (Individual Duels): 
 Modifier for experience gain: 0.050000 
+
+
+Image Test!
+
+![Trends Pic](trendsPic.png)
