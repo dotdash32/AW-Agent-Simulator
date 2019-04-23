@@ -83,3 +83,7 @@ Experience of each Pure Color: 11.00
 Graphical Trends in the Simulation:
 ![Trends Graphs](trendsPic.png)
 
+Click Below to watch the video:
+
+[![Trends Graphs](trendsPic.png)](BBoverTime.mp4)
+
