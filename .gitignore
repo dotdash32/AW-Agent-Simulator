@@ -26,3 +26,6 @@ codegen/
 
 # Octave session info
 octave-workspace
+
+# Generated Videos - Too big
+*.mp4
