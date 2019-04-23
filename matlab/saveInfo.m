@@ -71,3 +71,7 @@ fprintf(fidInfo, '\n'); %add an extra newline for clarity
 fprintf(fidInfo, 'Experience of each Pure Color: %0.2f\n\n', ...
     PureColorPara.exp);
 fprintf(fidInfo, '--- \n\n'); %SECTION SEPARATER
+
+
+fprintf(fidInfo, 'Graphical Trends in the Simulation:\n');
+fprintf(fidInfo, '![Trends Graphs](trendsPic.png)\n\n'); %add image

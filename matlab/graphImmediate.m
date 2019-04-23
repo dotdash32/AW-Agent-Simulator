@@ -9,7 +9,7 @@ function [fig, movie] = graphImmediate(players, oldFig, livelist, movie, simRoun
         title('Evolution of Brain Burst');
         movie = VideoWriter(['savedSims/',simRounds, '/BBoverTime.mp4']...
             ,'MPEG-4'); %initalize
-        movie.FrameRate = 3;
+        movie.FrameRate = 10; %real fast
         open(movie); %starto
 
     elseif(oldFig == -1) % deiniialize

@@ -7,7 +7,7 @@
 seedy = 2039; %save for later
 rng(seedy); %set the seed
 
-roundLim = 500; %how many rounds to run of the simulation
+roundLim = 400; %how many rounds to run of the simulation
 
 
 % makePlayer
@@ -15,8 +15,9 @@ makePlayerPara.expVer = 'cont'; %or discr
 makePlayerPara.expRange = [1 10]; %range of experience values ('disc')
 makePlayerPara.expMax = 10; %max of continuous exp vals ('cont')
     %adding options for continuous or discrete starting exps
-makePlayerPara.valDistro = [5 5]; %A = B for beta distrobution
-makePlayerPara.satDistro = [4 2]; %A, B for satruation (radius) distro
+makePlayerPara.valDistro = [7 6]; %A, B for beta distrobution
+makePlayerPara.satDistro = [1.75 1.5]; %A, B for saturation (radius) distro
+
 makePlayerPara.MoralBooster = 10; %multiplier for morality
 
 %duel
