@@ -71,6 +71,7 @@ Chance of Kid Function: @(x)randi(floor(x/30)+1,1)
 ### Pure Colors (Easy to follow Players) 
 
 Color Values (HSL): 
+
 |King |Color|Saturation|Luminance|
 |---|---|---|---|
 | Red | 0 | 100 | 50 |
