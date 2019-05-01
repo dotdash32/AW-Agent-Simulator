@@ -7,20 +7,10 @@ function [fig, movie] = graphImmediate(players, oldFig, livelist, movie, simRoun
         xlabel('Player Experience');
         ylabel('Player Win Rate');
         title('Evolution of Brain Burst');
-        fileMP4 = ['savedSims/',simRounds{2}, '/BBoverTime.mp4'];
-        fileGIF = ['savedSims/',simRounds{2}, '/BBoverTime.gif'];
-        movie = VideoWriter(fileMP4,'MPEG-4'); %initalize
-        movie.FrameRate = 5; %real fast
+        movie = VideoWriter(['savedSims/',simRounds, '/BBoverTime.mp4']...
+            ,'MPEG-4'); %initalize
+        movie.FrameRate = 10; %real fast
         open(movie); %starto
-        
-        text(.5,.9, 'Accel World Agent Simulator','FontSize',36,...
-            'HorizontalAlignment','center');
-        text(.5,.8, 'Start!','FontSize',48,'HorizontalAlignment','center');
-        
-        frame = getframe(fig); %capture frame
-        writeVideo(movie, frame); %record it
-        [A,map] = rgb2ind(frame2im(frame),256); %for gif
-        imwrite(A,map,fileGIF,'gif','LoopCount',Inf,'DelayTime',1);
 
     elseif(oldFig == -1) % deiniialize
         fig = oldFig; %keep it the same
@@ -78,15 +68,12 @@ function [fig, movie] = graphImmediate(players, oldFig, livelist, movie, simRoun
             'the simulation']);
         legend(legendo,'Location','southeast'); %with each color
         text(0, .9, sprintf(['   Dot Size corresponds to number of BP '...
-            '\n   Round: ' num2str(simRounds{1})]));
+            '\n   Round: ' num2str(simRounds)]));
         xlim([0 max([players.exp])*1.1]); %approximating
         ylim([0 1]); %keeping it consistent
         
         frame = getframe(fig); %capture frame
         writeVideo(movie, frame); %record it
-        [A,map] = rgb2ind(frame2im(frame),256); %for gif
-        fileGIF = ['savedSims/',simRounds{2}, '/BBoverTime.gif'];
-        imwrite(A,map,fileGIF,'gif','WriteMode','append','DelayTime',.1667);
     end
 end
 

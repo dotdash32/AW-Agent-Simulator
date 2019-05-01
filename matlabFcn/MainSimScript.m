@@ -101,7 +101,7 @@ deadlist = []; %no one's dead yet
 livelist = 1:100; %everyone's alive
 bigData = struct; %empty, no data yet
 
-[stateFig, movie] = graphImmediate(players, 0, livelist, 0, {0, simTitle}); %initialize
+[stateFig, movie] = graphImmediate(players, 0, livelist, 0, simTitle); %initialize
 
 for rounds = 1:roundLim %loop the simulation
     
@@ -131,8 +131,7 @@ for rounds = 1:roundLim %loop the simulation
     bigData = recordTrends(players, rounds, livelist, bigData); %record info
     
     %Graph each round's state
-    [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie,...
-        {rounds, simTitle});
+    [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie, rounds);
     
     if(size(livelist,2)  <= 1)
         %can't duel any more
@@ -145,8 +144,7 @@ end
 %Analyze what happened, hopefully
 
 bigData(1).simmy = simTitle; %save it to pass in for graphing
-[stateFig, movie] = graphImmediate(players, -1, livelist, movie,...
-    {rounds, simTitle}); %initialize
+[stateFig, movie] = graphImmediate(players, -1, livelist, movie, rounds); %initialize
 fig = graphTrends(bigData, players); %graph what's happening
 
 %still check if saving

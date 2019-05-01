@@ -135,15 +135,3 @@ title('Color versus Luminance')
 rticks([]); %cleaner
 
 print('ColoringNotes/chartByChart.png','-dpng')
-
-%% Color wheel with fixed saturation
-close all
-figure;
-n = 500
-nP.color = randi([0 360],[1 n]);
-nP.val = randi([0 100],[1 n]);
-nP.sat = 100*ones([1 n]);
-
-c = BBcolors2RGB(nP); %get colors
-polarscatter(nP.color,100-nP.val, 100,c,'filled');
-

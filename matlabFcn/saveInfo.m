@@ -6,11 +6,6 @@ direc = ['SavedSims/' simTitle '/']; %concat for ease
 mkdir(direc); %create
 fidInfo = fopen([direc,'README.md'],'w'); %info folder
 fprintf(fidInfo,'# Brain Burst Simulation: %s \n\n',simTitle); %header
-
-fprintf(fidInfo, '## Graphical Trends in the Simulation:\n');
-fprintf(fidInfo, '![Trends Graphs](trendsPic.png)\n\n'); %add image
-fprintf(fidInfo, '![gif over time](BBoverTime.gif)\n\n'); %add gif?
-
 fprintf(fidInfo, '## Parameters \n### Global: \n\n');
 fprintf(fidInfo, 'Seed: %d, Number of Rounds: %d \n\n',seedy, roundLim);
 fprintf(fidInfo, '--- \n\n'); %SECTION SEPARATER
@@ -78,3 +73,5 @@ fprintf(fidInfo, 'Experience of each Pure Color: %0.2f\n\n', ...
 fprintf(fidInfo, '--- \n\n'); %SECTION SEPARATER
 
 
+fprintf(fidInfo, 'Graphical Trends in the Simulation:\n');
+fprintf(fidInfo, '![Trends Graphs](trendsPic.png)\n\n'); %add image
