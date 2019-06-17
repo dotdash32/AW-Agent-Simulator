@@ -18,7 +18,7 @@ makePlayerPara.expMax = 10; %max of continuous exp vals ('cont')
 makePlayerPara.valDistro = [7 6]; %A, B for beta distrobution
 makePlayerPara.satDistro = [1.75 1.5]; %A, B for saturation (radius) distro
 
-makePlayerPara.MoralBooster = 10; %multiplier for morality
+% makePlayerPara.MoralBooster = 10; %multiplier for morality
 
 %duel
 duelPara.expMod = .05; %modifier for experience gain
@@ -45,8 +45,8 @@ makeBabesPara.chanceFcn = @(x) randi(floor(x/30)+1, 1); %chance function
     %in frequency over time because the random range gets bigger
 
 %Pure Colors
-PureColors = struct('color', {0 60 120 240 300 180}, 'sat',...
-    {100 100 100 100 100 0}, 'light', {50 50 50 50 50 100});
+PureColors = struct('color', {0 60 120 240 275 180}, 'sat',...
+    {100 100 100 100 100 0}, 'light', {50 50 50 50 37 100});
     %What colors will they be?  White Cosmos is "infinite" theta...
 PureColorPara.exp = makePlayerPara.expMax*1.1; %super high
     %set it so they are always more powerful
@@ -55,9 +55,23 @@ PureColorPara.exp = makePlayerPara.expMax*1.1; %super high
 %% Title and Preface simulation
 % Move titling up, and create text file of parameters
 
+
 simTitle=inputdlg('Sim Title, hit cancel to not save', 'Save Simulation?');
 if(~isempty(simTitle)) %are we saving?
     simTitle = simTitle{1}; %to string
+    direc = ['SavedSims/' simTitle '/']; %concat for ease
+    while(isfolder(direc)) %overwritting
+        simTitle1 = inputdlg(sprintf(['Warning: Directory "%s" already'...
+            ' exists, and will overwrite old data.\n  Do you wish to'...
+            ' re-title the simulation?\n  Press Cancel to continue and'...
+            ' overwrite existing data.'],simTitle),...
+            'Warning!  Overwritting Data');
+        if(isempty(simTitle1)) %we'll overwrite
+            break;
+        else
+            simTitle = simTitle1{1}; %for new data
+        end
+    end
     saveInfo; %save information, now in separate script
     % Things to do
     %Add round number to bb chart
@@ -78,20 +92,23 @@ end
 % exp - personal experience, increments through battles
 %players = struct('gen','','color','', 'sat','','rounds','','BP','', 'exp','');
 
-players = struct([]); %intiliaze
+clear players; %start clean
+players(100) = makePlayer(0,0,1, makePlayerPara); %start at end
 
 %make Pure Colors and follow them
 for numPures = 1:6
     newPlayer = makePureColor(PureColors(numPures),PureColorPara);
         %create pure colors, only varying color, keeping Exp, etc const
-    players = [players newPlayer];
+    players(numPures) = newPlayer;
+end
+%make Normal players
+for numOrig = 7:99
+    newPlayer = makePlayer(0,0,1, makePlayerPara);
+    players(numOrig) = newPlayer;
 end
 
-%make Normal players
-for numOrig = 7:100
-    newPlayer = makePlayer(0,0,1, makePlayerPara);
-    players = [players newPlayer];
-end
+
+
 
 %% Run sim
 
@@ -133,7 +150,6 @@ for rounds = 1:roundLim %loop the simulation
     %Graph each round's state
     [stateFig, movie] = graphImmediate(players, stateFig, livelist, movie,...
         {rounds, simTitle});
-    
     if(size(livelist,2)  <= 1)
         %can't duel any more
         break;

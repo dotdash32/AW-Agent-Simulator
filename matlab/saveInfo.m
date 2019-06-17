@@ -2,7 +2,6 @@
 %moving this to a separate script so the main one is that much cleaner.
 
 
-direc = ['SavedSims/' simTitle '/']; %concat for ease
 mkdir(direc); %create
 fidInfo = fopen([direc,'README.md'],'w'); %info folder
 fprintf(fidInfo,'# Brain Burst Simulation: %s \n\n',simTitle); %header
@@ -63,7 +62,7 @@ fprintf(fidInfo, 'Chance of Kid Function: %s \n\n', ...
 fprintf(fidInfo, '--- \n\n'); %SECTION SEPARATER
 
 fprintf(fidInfo, '### Pure Colors (Easy to follow Players) \n\n');
-fprintf(fidInfo, 'Color Values (HSL): \n'); %start table
+fprintf(fidInfo, 'Color Values (HSL): \n\n'); %start table
 fprintf(fidInfo, '|King |Color|Saturation|Luminance|\n');
 fprintf(fidInfo, '|---|---|---|---|\n'); %table header
 kingColors = {'Red' 'Yellow' 'Green' 'Blue' 'Purple' 'White'}; %king names

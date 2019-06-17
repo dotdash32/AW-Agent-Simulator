@@ -25,7 +25,7 @@ function [bigData] = recordTrends(players, rounds, livelist, oldData)
     bigData(rounds).livings = size([alives(longLives(1:2:end) ...
         +roundCheck -rounds < 0).exp],2); %how many are there
     
-    bigData(rounds).Origis = {[players(1:100).BP]}; %follow just Gen1
+    bigData(rounds).Origis = [players(1:100).BP]; %follow just Gen1
     bigData(rounds).liveOrig = sum(livelist <= 100); %how many originators?
     
     bigData(rounds).pureBP = [players(1:6).BP]; %BP for pure colors

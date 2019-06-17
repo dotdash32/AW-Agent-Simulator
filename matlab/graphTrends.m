@@ -52,16 +52,16 @@ function [fig] = graphTrends(bigData, players)
     ylabel("Average Experience");
     title("Average Experience");
     xlabel("Rounds");
-    legend({'Total Average Exp','Survivor Avergae Exp',...
+    legend({'Total Average Exp','Survivor Average Exp',...
         'Total Players','Survivors'},'Location','best');
     
    
     subplot(totPlots(1),totPlots(2), 2) %graph 2, (1)
     hold on
-    bords = {'k','b','g','r','c','m','y',[1 .4 .6] [1 .5 .5] [1 .5 0]}; 
-        %colors for levels
+%     bords = {'k','b','g','r','c','m','y',[1 .4 .6] [1 .5 .5] [1 .5 0]}; 
+        %colors for levels, depreciated
     h = area(reshape([bigData.perLevel],10,[])');
-    h.FaceColor
+    h.FaceColor;
     title('Level Composition');
     xlabel('Rounds');
     ylabel('Percent at each Level');
@@ -71,7 +71,7 @@ function [fig] = graphTrends(bigData, players)
     hold on
     cRGB = BBcolors2RGB(players(1:100)); %get colors
     cellData = [bigData.Origis]; %get it in a cell
-    arrayData = [cellData{:}]; %into an array
+    arrayData = [cellData]; %into an array
     for indP = 1:100
         plot([0 roundi], [100 arrayData(indP:100:end)], ...
             'Color', cRGB(indP,:)); %avg exp of survivors

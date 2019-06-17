@@ -12,13 +12,16 @@ function [fig, movie] = graphImmediate(players, oldFig, livelist, movie, simRoun
         movie = VideoWriter(fileMP4,'MPEG-4'); %initalize
         movie.FrameRate = 5; %real fast
         open(movie); %starto
-        
-        text(.5,.9, 'Accel World Agent Simulator','FontSize',36,...
+        xlim([0 max([players.exp])*1.1]); %approximating
+        ylim([0 1]); %keeping it consistent
+        text(mean(xlim),.9, 'Accel World Agent Simulator','FontSize',36,...
             'HorizontalAlignment','center');
-        text(.5,.8, 'Start!','FontSize',48,'HorizontalAlignment','center');
-        
+        text(mean(xlim),.8, 'Start!','FontSize',48,...
+            'HorizontalAlignment','center');
         frame = getframe(fig); %capture frame
-        writeVideo(movie, frame); %record it
+        for inF = 1:movie.FrameRate %match GIF length
+            writeVideo(movie, frame); %record it
+        end
         [A,map] = rgb2ind(frame2im(frame),256); %for gif
         imwrite(A,map,fileGIF,'gif','LoopCount',Inf,'DelayTime',1);
 
@@ -86,7 +89,7 @@ function [fig, movie] = graphImmediate(players, oldFig, livelist, movie, simRoun
         writeVideo(movie, frame); %record it
         [A,map] = rgb2ind(frame2im(frame),256); %for gif
         fileGIF = ['savedSims/',simRounds{2}, '/BBoverTime.gif'];
-        imwrite(A,map,fileGIF,'gif','WriteMode','append','DelayTime',.1667);
+        imwrite(A,map,fileGIF,'gif','WriteMode','append','DelayTime',.2);
     end
 end
 

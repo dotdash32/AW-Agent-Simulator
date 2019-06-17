@@ -7,3 +7,4 @@
 # LFS for videos and data files
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.gif filter=lfs diff=lfs merge=lfs -text
+*.mlappinstall filter=lfs diff=lfs merge=lfs -text
