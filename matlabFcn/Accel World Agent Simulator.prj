@@ -1,0 +1,85 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="492898451" file="/Users/Josh/Documents/Berkeley Classes and Clubs/MatLab Shenigans/AW-Agent-Simulator/matlabFcn/Accel World Agent Simulator.prj" location="/Users/Josh/Documents/Berkeley Classes and Clubs/MatLab Shenigans/AW-Agent-Simulator/matlabFcn" name="Accel World Agent Simulator" target="target.mlapps" target-name="Package App">
+    <param.appname>Accel World Agent Simulator</param.appname>
+    <param.authnamewatermark>Josh DeWitt</param.authnamewatermark>
+    <param.email>dotdash32@gmail.com</param.email>
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary>Accel World Simulator</param.summary>
+    <param.description />
+    <param.screenshot>/private/var/folders/ld/sj9shkx5331gx4hw5k98dlf80000gn/T/tp56a8f598_af74_4b3c_8a3c_62c6c6fc4007.png</param.screenshot>
+    <param.version>1.1.1</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}/AWSimApp/MLApp</param.output>
+    <param.guid>32facca4-6e14-46e5-a974-5ae12a369480</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.description />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/AWSimApp.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/BBcolors2RGB.m</file>
+      <file>${PROJECT_ROOT}/applyDefaults.m</file>
+      <file>${PROJECT_ROOT}/duel.m</file>
+      <file>${PROJECT_ROOT}/graphBBScatter.m</file>
+      <file>${PROJECT_ROOT}/graphTrends.m</file>
+      <file>${PROJECT_ROOT}/killEm.m</file>
+      <file>${PROJECT_ROOT}/lvlUp.m</file>
+      <file>${PROJECT_ROOT}/makeBabes.m</file>
+      <file>${PROJECT_ROOT}/makePlayer.m</file>
+      <file>${PROJECT_ROOT}/makePureColor.m</file>
+      <file>${PROJECT_ROOT}/oneRound.m</file>
+      <file>${PROJECT_ROOT}/recordTrends.m</file>
+      <file>${PROJECT_ROOT}/runningCallbacks.m</file>
+      <file>${PROJECT_ROOT}/saveBBScatter.m</file>
+      <file>${PROJECT_ROOT}/saveInfo.m</file>
+      <file>${PROJECT_ROOT}/saveTrends.m</file>
+      <file>${PROJECT_ROOT}/settingsCallbacks.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}/AWSimApp" name="MLApp" optional="false">/Users/Josh/Documents/Berkeley Classes and Clubs/MatLab Shenigans/AW-Agent-Simulator/matlabFcn/AWSimApp/MLApp</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2019a.app</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.14.3</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

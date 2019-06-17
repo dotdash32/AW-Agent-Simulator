@@ -34,7 +34,7 @@
       <param.MergeInstrumentationResults />
       <param.VerificationMode />
       <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
-      <param.EnableMexProfiling>false</param.EnableMexProfiling>
+      <param.EnableMexProfiling />
       <var.BuiltWithMexProfiling />
       <param.CustomSourceCode />
       <param.CustomHeaderCode />

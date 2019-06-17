@@ -12,10 +12,10 @@ else
     player.record = {rounds; text}; %label parent
 end
 player.color = randi([1 360], 1); %assign color
-Av = para.valDistro(1); Bv = para.valDistro(2); %for simplicity
+Al = para.lumDistro(1); Bl = para.lumDistro(2); %for simplicity
 As = para.satDistro(1); Bs = para.satDistro(2); %for simplicity
-maxRad = max(betapdf(0:.01:1,Av,Bv)); %dividing factor
-player.val = round(100*random('beta',Av,Bv)); %assign lightness (HSL thingy)
+maxRad = max(betapdf(0:.01:1,Al,Bl)); %dividing factor
+player.val = round(100*random('beta',Al,Bl)); %assign lightness (HSL thingy)
 player.sat = round(100*random('beta',As,Bs))*...%assign saturation
     (-abs(player.val-50)+50)/50;%modify radius like cone
     %(betapdf(player.val/100,Av,Bv)/maxRad); %modify radius
@@ -28,9 +28,9 @@ player.BP = 100; %starts with 100 points
     %Higher is more "Moral", less likely to be mean, NOT READY YET
 
 %base exp, from IRL?
-if(strcmp(para.expVer,'cont')) %continuous distrobution
+if(strcmp(para.expVer,'Continuous')) %continuous distrobution
     player.exp = rand(1)*para.expMax; %between 0-expMax
-elseif(strcmp(para.expVer,'disc')) %discrete integer vals
+elseif(strcmp(para.expVer,'Discrete')) %discrete integer vals
     player.exp = randi(para.expRange, 1); %only ints allowed
 end
 player.wins = [0;1]; %how many wins/total battles

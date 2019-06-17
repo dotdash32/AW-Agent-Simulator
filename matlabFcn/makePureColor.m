@@ -5,7 +5,7 @@ player.record = {1; 'Created, Originator (Pure Color)'}; %whomstve
 
 player.color = colorIn.color; %assign color
 player.sat = colorIn.sat; %assign saturation
-player.val = colorIn.light; %assign value (HSL thingy)
+player.val = colorIn.val; %assign value (HSL thingy)
 player.rounds = [1, 0]; %still alive
 player.lvl = 1; %start at round 1
 player.kid = 0; %how many children

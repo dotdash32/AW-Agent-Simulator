@@ -1,9 +1,15 @@
-function [cRGB] = BBcolors2RGB(players)
+function [cRGB] = BBcolors2RGB(players, comp)
 %BBcolors2RGB Convert Players to RGB colors for display
-
-cHSL = [[players.color]' /360 ...
-        [players.sat]' /100 ...
-        [players.val]' /100]; %create hsl colors
+%   comp switches between normal colors (= 0) and complimentary colors (=1)
+if(comp == 0)
+    cHSL = [[players.color]' /360 ...
+            [players.sat]' /100 ...
+            [players.val]' /100]; %create hsl colors
+elseif(comp == 1) %invert colors
+     cHSL = [abs([players.color]' - 180) /360 ...
+            abs([players.sat]' - 0) /100 ...
+            abs([players.val]' - 100) /100]; %create hsl colors
+end
 cRGB = hsl2rgb(cHSL); %convert to rgb for plotting
 end
 
