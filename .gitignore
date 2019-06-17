@@ -8,7 +8,7 @@
 *.mex*
 
 # Packaged app and toolbox files
-*.mlappinstall
+#*.mlappinstall
 *.mltbx
 
 # Generated helpsearch folders
@@ -29,3 +29,6 @@ octave-workspace
 
 # Generated Videos - Too big
 # *.mp4 #can include on LFS hopefully
+
+# Adobe Illustrator files for app exports
+*.ai
