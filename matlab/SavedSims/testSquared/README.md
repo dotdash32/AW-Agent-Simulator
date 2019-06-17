@@ -1,4 +1,4 @@
-# Brain Burst Simulation: test200 
+# Brain Burst Simulation: testSquared 
 
 ## Graphical Trends in the Simulation:
 ![Trends Graphs](trendsPic.png)
@@ -8,7 +8,7 @@
 ## Parameters 
 ### Global: 
 
-Seed: 2039, Number of Rounds: 200 
+Seed: 2039, Number of Rounds: 10 
 
 --- 
 

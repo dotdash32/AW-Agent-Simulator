@@ -1,4 +1,4 @@
-# Brain Burst Simulation: testGIF 
+# Brain Burst Simulation: test1 
 
 ## Graphical Trends in the Simulation:
 ![Trends Graphs](trendsPic.png)
@@ -71,13 +71,14 @@ Chance of Kid Function: @(x)randi(floor(x/30)+1,1)
 ### Pure Colors (Easy to follow Players) 
 
 Color Values (HSL): 
+
 |King |Color|Saturation|Luminance|
 |---|---|---|---|
 | Red | 0 | 100 | 50 |
 | Yellow | 60 | 100 | 50 |
 | Green | 120 | 100 | 50 |
 | Blue | 240 | 100 | 50 |
-| Purple | 300 | 100 | 50 |
+| Purple | 275 | 100 | 37 |
 | White | 180 | 0 | 100 |
 
 Experience of each Pure Color: 11.00

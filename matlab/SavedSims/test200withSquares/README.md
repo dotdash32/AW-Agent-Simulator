@@ -1,4 +1,4 @@
-# Brain Burst Simulation: test200 
+# Brain Burst Simulation: test200withSquares 
 
 ## Graphical Trends in the Simulation:
 ![Trends Graphs](trendsPic.png)
